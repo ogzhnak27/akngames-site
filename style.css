@@ -48,7 +48,7 @@ h1, h2, h3 { font-family: var(--display); font-weight: 400; line-height: 1.12; m
 .slides { position: relative; height: clamp(460px, 40vw, 680px); }
 .slide { position: absolute; inset: 0; opacity: 0; visibility: hidden; transition: opacity .8s ease, visibility .8s; }
 .slide.on { opacity: 1; visibility: visible; }
-.slide > img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; object-position: 70% 50%; }
+.slide > img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; object-position: 70% 0%; }   /* ust kirpilmasin: Ella'nin topuzu */
 .slide::after { content: ""; position: absolute; inset: 0; pointer-events: none;
   background: linear-gradient(90deg, rgba(255, 250, 243, .94) 0%, rgba(255, 250, 243, .78) 30%, rgba(255, 250, 243, 0) 56%); }
 .slide-txt { position: relative; z-index: 2; height: 100%; display: flex; flex-direction: column; justify-content: center; align-items: flex-start; }
@@ -73,10 +73,13 @@ h1, h2, h3 { font-family: var(--display); font-weight: 400; line-height: 1.12; m
 .btn { display: inline-flex; align-items: center; gap: 10px; text-decoration: none; font-weight: 800; font-size: 1rem; border-radius: 999px; padding: 13px 26px; transition: transform .15s ease; }
 .btn:hover { transform: translateY(-2px); }
 .btn-play { color: #fff; background: linear-gradient(135deg, #7b5cff, #b06bff); box-shadow: 0 5px 0 var(--brand-dark), 0 10px 22px rgba(91, 63, 230, .35); text-shadow: 0 1px 0 rgba(0, 0, 0, .18); }
-.btn-dark { color: #fff; background: #1e1b2b; box-shadow: 0 5px 0 #000, 0 10px 22px rgba(0, 0, 0, .25); }
-.btn-dark svg { width: 20px; height: 20px; }
-.btn-dark small { display: block; font-size: .7rem; font-weight: 600; opacity: .8; line-height: 1; letter-spacing: .04em; }
-.btn-dark b { display: block; line-height: 1.15; }
+/* resmi Google Play rozeti (play.google.com'dan); png'lerin kendi bosluklari negatif kenarla siliniyor, gorunen boy 58 px */
+.gp-badge { display: inline-flex; line-height: 0; border-radius: 12px; transition: transform .15s ease; }
+a.gp-badge:hover { transform: translateY(-2px); }
+.gp-badge img { height: 86px; width: auto; margin: -14px; }
+.gp-badge.tr img { height: 76px; margin: -9px 0; }
+.store { display: flex; flex-wrap: wrap; align-items: center; gap: 14px; margin-top: 6px; }
+.store-soon { font-weight: 800; font-size: .8rem; letter-spacing: .1em; text-transform: uppercase; color: var(--brand-dark); background: #efeaff; border-radius: 999px; padding: 6px 12px; }
 .btn-light { color: var(--ink); background: #fff; box-shadow: 0 5px 0 var(--line), 0 10px 22px rgba(43, 33, 64, .10); }
 
 
@@ -191,5 +194,5 @@ main.doc li { margin: 4px 0; }
 @media (prefers-reduced-motion: reduce) {
   .slide { transition: none; }
   html { scroll-behavior: auto; }
-  .btn { transition: none; }
+  .btn, .gp-badge { transition: none; }
 }
