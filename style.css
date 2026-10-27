@@ -1,0 +1,195 @@
+/* AKN Games sitesi. Duzen higgsgame.com orneginden (renkli logo blogu + sade menu, tam genislik oyun gorseli,
+   "Featured Game" satiri, sirket ve iletisim). Yazi tipleri oyundakiyle ayni ve sitede barinir (ucuncu tarafa istek yok). */
+@font-face { font-family: "Paytone One"; src: url("fonts/paytone-one.woff2") format("woff2"); font-weight: 400; font-display: swap; }
+@font-face { font-family: "Nunito"; src: url("fonts/nunito-600.woff2") format("woff2"); font-weight: 600; font-display: swap; }
+@font-face { font-family: "Nunito"; src: url("fonts/nunito-800.woff2") format("woff2"); font-weight: 800; font-display: swap; }
+
+:root {
+  --brand: #7b5cff;
+  --brand-dark: #5b3fe6;
+  --sky: #3fa9f5;
+  --sky-soft: #e3f3ff;
+  --sun: #ffc83a;
+  --leaf: #2fbf71;
+  --leaf-dark: #1f9a58;
+  --ink: #15122b;
+  --muted: #6b6280;
+  --bg: #fffaf3;
+  --soft: #f6efe5;
+  --card: #ffffff;
+  --line: #eadfd2;
+  --radius: 22px;
+  --shadow: 0 2px 4px rgba(43, 33, 64, .06), 0 14px 34px rgba(43, 33, 64, .10);
+  --display: "Paytone One", "Arial Rounded MT Bold", "Segoe UI", system-ui, sans-serif;
+  --body: "Nunito", "Segoe UI", system-ui, -apple-system, Roboto, Arial, sans-serif;
+}
+* { box-sizing: border-box; }
+html { scroll-behavior: smooth; -webkit-text-size-adjust: 100%; }
+body { margin: 0; background: var(--bg); color: var(--ink); font: 600 17px/1.65 var(--body); }
+img { max-width: 100%; display: block; }
+a { color: var(--brand-dark); text-underline-offset: 3px; }
+a:focus-visible, .btn:focus-visible { outline: 3px solid var(--sky); outline-offset: 3px; border-radius: 10px; }
+h1, h2, h3 { font-family: var(--display); font-weight: 400; line-height: 1.12; margin: 0; letter-spacing: .005em; }
+.wrap { max-width: 1140px; margin: 0 auto; padding: 0 20px; }
+
+/* ---------------------------------------------------------------- ust menu */
+.nav { position: sticky; top: 0; z-index: 20; display: flex; align-items: stretch; background: #fff; box-shadow: 0 1px 0 var(--line); }
+.logo { display: flex; align-items: center; background: var(--ink); text-decoration: none; padding: 0 30px; min-height: 72px; }
+.logo img { height: 36px; width: auto; }
+.nav nav { flex: 1; display: flex; align-items: center; justify-content: center; gap: clamp(18px, 6vw, 90px); padding: 0 16px; }
+.nav nav a { color: var(--ink); text-decoration: none; font-weight: 800; font-size: .95rem; letter-spacing: .08em; text-transform: uppercase; }
+.nav nav a:hover, .nav nav a[aria-current="page"] { color: var(--brand); }
+.lang { display: flex; align-items: center; padding: 0 22px; }
+.lang a { color: var(--muted); font-weight: 800; font-size: .85rem; text-decoration: none; border: 2px solid var(--line); border-radius: 999px; padding: 4px 12px; }
+.lang a:hover { border-color: var(--brand); color: var(--brand); }
+
+/* ---------------------------------------------------------------- ana banner (kayan) */
+.slider { position: relative; overflow: hidden; background: #cfe9ff; }
+.slides { position: relative; height: clamp(460px, 40vw, 680px); }
+.slide { position: absolute; inset: 0; opacity: 0; visibility: hidden; transition: opacity .8s ease, visibility .8s; }
+.slide.on { opacity: 1; visibility: visible; }
+.slide > img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; object-position: 70% 50%; }
+.slide::after { content: ""; position: absolute; inset: 0; pointer-events: none;
+  background: linear-gradient(90deg, rgba(255, 250, 243, .94) 0%, rgba(255, 250, 243, .78) 30%, rgba(255, 250, 243, 0) 56%); }
+.slide-txt { position: relative; z-index: 2; height: 100%; display: flex; flex-direction: column; justify-content: center; align-items: flex-start; }
+.slide-txt > * { max-width: 470px; }
+.game-logo { width: min(250px, 60%); height: auto; margin: 0 0 8px -6px; filter: drop-shadow(0 10px 16px rgba(21, 18, 43, .18)); }
+.slide h1 { font-size: clamp(1.8rem, 3.2vw, 2.7rem); margin: 0 0 10px; text-wrap: balance; }
+.slide p { color: var(--muted); font-size: 1.12rem; margin: 0 0 24px; }
+.slider-badge { position: absolute; z-index: 5; top: 22px; right: 26px; margin: 0; }
+.arrow { position: absolute; z-index: 5; top: 50%; transform: translateY(-50%); width: 48px; height: 48px; border: 0; border-radius: 50%;
+  background: rgba(255, 255, 255, .85); color: var(--ink); font-size: 2rem; line-height: 1; cursor: pointer; box-shadow: var(--shadow); }
+.arrow:hover { background: #fff; }
+.arrow:focus-visible, .dots button:focus-visible { outline: 3px solid var(--brand); outline-offset: 3px; }
+.prev { left: 14px; }
+.next { right: 14px; }
+.dots { position: absolute; z-index: 5; left: 0; right: 0; bottom: 18px; display: flex; justify-content: center; gap: 10px; }
+.dots button { width: 12px; height: 12px; padding: 0; border: 2px solid #fff; border-radius: 50%; background: rgba(255, 255, 255, .5); cursor: pointer; box-shadow: 0 1px 4px rgba(0, 0, 0, .25); }
+.dots button[aria-current="true"] { background: var(--brand); border-color: #fff; width: 28px; border-radius: 999px; }
+.eyebrow { display: inline-block; font-weight: 800; font-size: .85rem; letter-spacing: .14em; text-transform: uppercase; color: var(--brand-dark); background: #fff; border-radius: 999px; padding: 6px 14px; box-shadow: var(--shadow); margin-bottom: 18px; }
+.actions { display: flex; flex-wrap: wrap; gap: 14px; align-items: center; }
+
+/* oyun dugmeleri (oyundaki yesil dugme gibi) */
+.btn { display: inline-flex; align-items: center; gap: 10px; text-decoration: none; font-weight: 800; font-size: 1rem; border-radius: 999px; padding: 13px 26px; transition: transform .15s ease; }
+.btn:hover { transform: translateY(-2px); }
+.btn-play { color: #fff; background: linear-gradient(135deg, #7b5cff, #b06bff); box-shadow: 0 5px 0 var(--brand-dark), 0 10px 22px rgba(91, 63, 230, .35); text-shadow: 0 1px 0 rgba(0, 0, 0, .18); }
+.btn-dark { color: #fff; background: #1e1b2b; box-shadow: 0 5px 0 #000, 0 10px 22px rgba(0, 0, 0, .25); }
+.btn-dark svg { width: 20px; height: 20px; }
+.btn-dark small { display: block; font-size: .7rem; font-weight: 600; opacity: .8; line-height: 1; letter-spacing: .04em; }
+.btn-dark b { display: block; line-height: 1.15; }
+.btn-light { color: var(--ink); background: #fff; box-shadow: 0 5px 0 var(--line), 0 10px 22px rgba(43, 33, 64, .10); }
+
+
+/* ---------------------------------------------------------------- bolumler */
+section.block { padding: 88px 0; }
+.head { text-align: center; margin: 0 auto 48px; max-width: 720px; }
+.head .sub { display: block; font-weight: 800; color: var(--muted); font-size: 1.15rem; margin-bottom: 6px; }
+.head h2 { font-size: clamp(2.1rem, 5vw, 3.2rem); }
+.head p { color: var(--muted); margin: 14px 0 0; }
+
+/* one cikan oyun satiri */
+.game { display: grid; grid-template-columns: .9fr 1.1fr; align-items: center; gap: 56px; background: var(--card); border-radius: 32px; padding: 48px; box-shadow: var(--shadow); }
+.phone { position: relative; justify-self: center; width: min(290px, 100%); aspect-ratio: 9 / 19; border-radius: 44px; background: #1e1b2b; padding: 12px; box-shadow: 0 30px 60px rgba(43, 33, 64, .30); transform: rotate(-4deg); }
+.phone::before { content: ""; position: absolute; top: 18px; left: 50%; width: 10px; height: 10px; transform: translateX(-50%); background: #1e1b2b; border-radius: 50%; z-index: 2; }
+.phone img { width: 100%; height: 100%; object-fit: cover; object-position: center top; border-radius: 34px; }
+.game-title { display: flex; align-items: center; gap: 16px; margin-bottom: 12px; }
+.game-title img { width: 76px; height: 76px; border-radius: 20px; box-shadow: 0 8px 18px rgba(43, 33, 64, .2); }
+.game-title h3 { font-size: clamp(1.7rem, 3.6vw, 2.5rem); }
+.tag { display: inline-block; font-weight: 800; font-size: .8rem; letter-spacing: .1em; text-transform: uppercase; color: var(--leaf-dark); background: #e2f8ec; border-radius: 999px; padding: 4px 12px; margin-bottom: 8px; }
+.game p { color: var(--muted); font-size: 1.08rem; margin: 0 0 18px; }
+.points { list-style: none; padding: 0; margin: 0 0 26px; display: grid; gap: 10px; }
+.points li { display: flex; align-items: center; gap: 12px; font-weight: 800; }
+.points img { width: 44px; height: 44px; flex: none; }
+
+/* ozellik kartlari */
+.features { display: grid; grid-template-columns: repeat(3, 1fr); gap: 22px; margin-top: 30px; }
+.feature { background: var(--card); border-radius: var(--radius); box-shadow: var(--shadow); overflow: hidden; }
+.feature .pic { height: 210px; display: grid; place-items: center; background: linear-gradient(180deg, var(--sky-soft), #fff6ea); }
+.feature .pic img { max-height: 190px; width: auto; }
+.feature .pic.room { background: linear-gradient(180deg, #fbede2, #f3e4d0); }
+.feature .pic.pair { position: relative; display: block; overflow: hidden; }
+.feature .pic.pair img { position: absolute; bottom: 0; height: 196px; width: auto; max-height: none; }
+.feature .pic.pair .e { left: 12%; z-index: 2; filter: drop-shadow(0 6px 12px rgba(21, 18, 43, .18)); }
+.feature .pic.pair .g { right: 8%; height: 182px; }
+.feature .pic.items { display: grid; grid-template-columns: repeat(3, 76px); gap: 8px; justify-content: center; align-content: center; }
+.feature .pic.items img { width: 76px; height: 76px; }
+.feature .txt { padding: 22px 24px 26px; }
+.feature h3 { font-size: 1.35rem; margin-bottom: 6px; }
+.feature p { margin: 0; color: var(--muted); }
+
+/* hikaye seridi */
+.story-block { padding-top: 0; }
+.story { display: grid; grid-template-columns: repeat(4, 1fr); gap: 18px; }
+.story figure { margin: 0; position: relative; border-radius: var(--radius); overflow: hidden; box-shadow: var(--shadow); background: #222; }
+.story img { width: 100%; aspect-ratio: 9 / 15; object-fit: cover; object-position: center 40%; }
+.story figcaption { position: absolute; left: 0; right: 0; bottom: 0; padding: 40px 16px 16px; color: #fff; font-weight: 800; line-height: 1.3;
+  background: linear-gradient(180deg, rgba(20, 14, 30, 0), rgba(20, 14, 30, .82)); }
+.story figcaption b { display: inline-grid; place-items: center; width: 28px; height: 28px; margin-right: 8px; border-radius: 50%; background: var(--sun); color: var(--ink); font-size: .9rem; }
+
+/* sirket */
+.company { background: linear-gradient(180deg, var(--sky-soft), var(--bg)); }
+.about { display: grid; grid-template-columns: 1.2fr .8fr; gap: 28px; align-items: start; }
+.about .card { background: var(--card); border-radius: var(--radius); box-shadow: var(--shadow); padding: 34px; }
+.about h3 { font-size: 1.6rem; margin-bottom: 10px; }
+.about p { color: var(--muted); margin: 0 0 14px; }
+.about address { font-style: normal; color: var(--muted); margin-bottom: 18px; }
+.stats { display: flex; flex-wrap: wrap; gap: 12px; margin-top: 18px; }
+.stats span { background: var(--soft); border-radius: 999px; padding: 6px 14px; font-weight: 800; font-size: .9rem; }
+
+/* ---------------------------------------------------------------- alt bilgi */
+footer.foot { background: var(--ink); color: #cfc8de; font-size: .95rem; }
+footer.foot .wrap { display: flex; flex-wrap: wrap; justify-content: space-between; align-items: center; gap: 18px; padding-top: 34px; padding-bottom: 40px; }
+footer.foot nav { display: flex; flex-wrap: wrap; gap: 8px 22px; }
+footer.foot a { color: #fff; text-decoration: none; font-weight: 800; }
+footer.foot a:hover { color: #c9b8ff; }
+.foot-brand { display: flex; align-items: center; }
+.foot-brand img { height: 28px; width: auto; }
+
+/* ---------------------------------------------------------------- metin sayfalari */
+.doc-top { background: linear-gradient(180deg, var(--sky-soft), var(--bg)); padding: 56px 0 30px; }
+.doc-top h1 { font-size: clamp(2rem, 5vw, 2.9rem); }
+.doc-top .date { color: var(--muted); margin: 8px 0 0; }
+main.doc { max-width: 860px; margin: 0 auto 72px; padding: 36px clamp(20px, 5vw, 48px); background: var(--card); border-radius: 28px; box-shadow: var(--shadow); }
+main.doc h2 { font-family: var(--display); font-size: 1.35rem; margin: 30px 0 8px; }
+main.doc h2:first-of-type { margin-top: 18px; }
+main.doc ul { padding-left: 1.2em; }
+main.doc li { margin: 4px 0; }
+.box { background: var(--sky-soft); border-radius: 18px; padding: 16px 20px; }
+
+/* ---------------------------------------------------------------- telefon ve tablet */
+@media (max-width: 760px) {
+  .slides { height: auto; }
+  .slide { position: absolute; }
+  .slide.on { position: relative; }
+  .slide > img { position: relative; height: auto; aspect-ratio: 4 / 3; object-position: 78% 50%; }
+  .slide::after { display: none; }
+  .slide-txt { height: auto; padding-top: 6px; padding-bottom: 54px; align-items: center; text-align: center; background: var(--bg); }
+  .slide-txt > * { max-width: 520px; }
+  .game-logo { width: 190px; margin: -110px auto 4px; }
+  .slide .actions { justify-content: center; }
+  .slider-badge { top: 12px; right: 12px; font-size: .72rem; padding: 4px 10px; }
+  .arrow { top: 34%; width: 40px; height: 40px; font-size: 1.6rem; }
+  .dots { bottom: 16px; }
+}
+@media (max-width: 920px) {
+  .game, .about { grid-template-columns: 1fr; }
+  .game { padding: 36px 24px; gap: 40px; }
+  .features { grid-template-columns: 1fr; max-width: 480px; margin-left: auto; margin-right: auto; }
+  .story { grid-template-columns: repeat(2, 1fr); }
+}
+@media (max-width: 640px) {
+  body { font-size: 16px; }
+  .nav { flex-wrap: wrap; }
+  .logo { flex: 1; min-height: 60px; padding: 0 18px; }
+  .logo img { height: 30px; }
+  .lang { padding: 0 14px; background: var(--ink); }
+  .lang a { color: #fff; border-color: rgba(255, 255, 255, .6); }
+  .nav nav { flex-basis: 100%; order: 3; gap: 24px; padding: 10px 16px; }
+  .phone { width: min(230px, 70%); }
+  section.block { padding: 64px 0; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .slide { transition: none; }
+  html { scroll-behavior: auto; }
+  .btn { transition: none; }
+}
